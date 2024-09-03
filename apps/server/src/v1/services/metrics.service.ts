@@ -6,7 +6,7 @@ async function getTodayMidnight() {
 }
 
 async function getMidnight(startDate: Date, days: number) {
-  return new Date(new Date(+startDate + 8.64e7 * days).setUTCHours(0, 0, 0, 0));
+  return new Date(new Date(+startDate - 8.64e7 * days).setUTCHours(0, 0, 0, 0));
 }
 
 export async function getGeneralMetrics() {
@@ -70,6 +70,10 @@ export async function getApplicationMetrics(
       };
     }
   }
+
+  metrics.sort((a, b) => {
+    return +a.date - +b.date;
+  });
 
   return metrics;
 }
