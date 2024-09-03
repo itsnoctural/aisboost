@@ -1,0 +1,21 @@
+{
+  "name": "aisboost",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "turbo": "^2.1.1"
+  },
+  "packageManager": "bun@1.1.26",
+  "workspaces": ["apps/*", "packages/*"],
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "@prisma/client",
+    "@prisma/engines",
+    "esbuild",
+    "prisma"
+  ]
+}

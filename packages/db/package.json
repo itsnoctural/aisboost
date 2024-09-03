@@ -1,0 +1,17 @@
+{
+  "name": "@aisboost/db",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "db:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.4",
+    "@prisma/adapter-neon": "^5.19.1",
+    "@prisma/client": "^5.19.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.19.1"
+  },
+  "main": "index.ts"
+}

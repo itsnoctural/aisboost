@@ -1,0 +1,41 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true,
+    "ignore": [
+      "node_modules",
+      ".turbo",
+      ".next",
+      ".vinxi",
+      ".output",
+      "prisma-client"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    },
+    "ignore": [
+      "node_modules",
+      ".turbo",
+      ".next",
+      ".vinxi",
+      ".output",
+      "prisma-client"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "ignore": [
+      "node_modules",
+      ".turbo",
+      ".next",
+      ".vinxi",
+      ".output",
+      "prisma-client"
+    ]
+  }
+}

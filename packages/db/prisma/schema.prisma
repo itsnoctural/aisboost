@@ -1,0 +1,119 @@
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native"]
+  previewFeatures = ["driverAdapters"]
+  output          = "../prisma-client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+
+  provider   String
+  providerId String @unique @map("provider_id")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  applications Application[]
+
+  identities Identity[]
+
+  @@map("user")
+}
+
+model Identity {
+  id        String   @id
+  expiresAt DateTime @map("expires_at")
+
+  user   User @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId Int  @map("user_id")
+
+  @@map("identity")
+}
+
+model Application {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  duration    Int @db.SmallInt
+  checkpoints Int @db.SmallInt
+
+  keyPrefix String @map("key_prefix")
+  keyLength Int    @map("key_length")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  sessions  Session[]
+  templates Template[]
+  metrics   Metrics[]
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @map("user_id")
+
+  @@map("application")
+}
+
+model Template {
+  id   Int    @id @default(autoincrement())
+  type String
+
+  apiKey String @map("api_key")
+  apiUrl String @map("api_url")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  applicationId Int         @map("application_id")
+
+  @@map("template")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  hwid      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  checkpoint Int    @default(1) @db.SmallInt
+  tk         String
+
+  key Key?
+
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  applicationId Int         @map("application_id")
+
+  @@map("session")
+}
+
+model Key {
+  id        String   @id
+  expiresAt DateTime @map("expires_at")
+
+  session   Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String  @unique @map("session_id")
+
+  @@map("key")
+}
+
+model Metrics {
+  id   String   @id @default(cuid())
+  date DateTime
+
+  generated   Int @default(0)
+  checkpoints Int @default(0)
+  verified    Int @default(0)
+  rejected    Int @default(0)
+
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  applicationId Int         @map("application_id")
+
+  @@map("metrics")
+}

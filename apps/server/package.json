@@ -1,0 +1,23 @@
+{
+  "name": "@aisboost/server",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --target=bun --outdir dist"
+  },
+  "dependencies": {
+    "@aisboost/db": "workspace:*",
+    "@elysiajs/cors": "^1.1.0",
+    "@lucia-auth/adapter-prisma": "^4.0.1",
+    "arctic": "^1.9.2",
+    "elysia": "^1.1.11",
+    "lucia": "^3.2.0",
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.8",
+    "@aisboost/tsconfig": "workspace:*"
+  },
+  "type": "module",
+  "main": "src/index.ts"
+}
