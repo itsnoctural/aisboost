@@ -4,13 +4,12 @@ import { lucia } from "../lib/lucia";
 
 export const auth = new Elysia()
   .guard({
+    as: "scoped",
     cookie: t.Cookie({
-      "aisboost.auth": t.String(), // BUG: .guard doesn't work with cookie since 1.1.0
+      "aisboost.auth": t.String(),
     }),
   })
-  .derive({ as: "scoped" }, async ({ request, error, cookie }) => {
-    if (!cookie["aisboost.auth"].value) throw error(401);
-
+  .resolve({ as: "scoped" }, async ({ request, error, cookie }) => {
     if (request.method !== "GET") {
       const origin = request.headers.get("Origin");
 
