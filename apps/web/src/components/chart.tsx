@@ -79,28 +79,28 @@ export function DashboardChart({ data }: Props) {
         />
         <Area
           dataKey="generated"
-          type="natural"
+          type="bump"
           fill="url(#fillGenerated)"
           stroke="var(--color-generated)"
           stackId="a"
         />
         <Area
           dataKey="checkpoints"
-          type="natural"
+          type="bump"
           fill="url(#fillCheckpoints)"
           stroke="var(--color-checkpoints)"
           stackId="a"
         />
         <Area
           dataKey="verified"
-          type="natural"
+          type="bump"
           fill="url(#fillVerified)"
           stroke="var(--color-verified)"
           stackId="a"
         />
         <Area
           dataKey="rejected"
-          type="natural"
+          type="bump"
           fill="url(#fillRejected)"
           stroke="var(--color-rejected)"
           stackId="a"
