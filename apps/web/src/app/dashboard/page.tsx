@@ -6,6 +6,10 @@ import { api } from "@/lib/api/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Dashboard",
+};
+
 export default async function Dashboard() {
   const { data: user } = await api.v1.users["@me"].get({
     fetch: { cache: "no-store" },

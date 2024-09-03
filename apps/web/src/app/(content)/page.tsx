@@ -3,6 +3,10 @@ import { Hero } from "@/components/marketing/hero";
 import { MetricsGroup } from "@/components/marketing/metrics";
 import { MarketingWrapper } from "@/components/marketing/wrapper";
 
+export const metadata = {
+  title: "AisBoost: Your monetization platform.",
+};
+
 export default function Home() {
   return (
     <MarketingWrapper>

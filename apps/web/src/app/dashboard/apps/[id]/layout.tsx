@@ -2,6 +2,16 @@ import { NavLink } from "@/components/dashboard/nav-link";
 import { api } from "@/lib/api/server";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { data: application } = await api.v1
+    .applications({ id: params.id })
+    .index.get();
+
+  return {
+    title: application?.name,
+  };
+}
+
 export default async function ApplicationLayout({
   params,
   children,

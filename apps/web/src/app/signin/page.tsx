@@ -2,6 +2,10 @@ import { SignIn as SI } from "@/components/signin";
 import { api } from "@/lib/api/server";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Sign In - AisBoost",
+};
+
 export default async function SignIn() {
   const { data: user } = await api.v1.users["@me"].get({
     fetch: { cache: "no-store" },

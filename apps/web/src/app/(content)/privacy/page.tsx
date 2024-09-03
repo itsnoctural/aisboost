@@ -1,6 +1,10 @@
 import { TextContainer, TextContent, TextTitle } from "@/components/text";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Privacy Policy",
+};
+
 export default async function Privacy() {
   return (
     <main className="flex flex-col max-w-screen-lg mx-auto my-12 gap-y-8 px-4">
