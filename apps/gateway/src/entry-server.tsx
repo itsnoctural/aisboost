@@ -10,6 +10,7 @@ export default createHandler(() => (
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
           <title>Gateway - AisBoost</title>
+          <meta name="admaven-placement" content="BrHw4rHU4" />
           {assets}
         </head>
         <body>
