@@ -56,18 +56,19 @@ export async function getApplicationMetrics(
       verified: true,
       rejected: true,
     },
-    orderBy: { date: "asc" },
   });
 
   for (let i = 0; i < 31; i++) {
-    if (!metrics[i]) {
-      metrics[i] = {
-        date: await getMidnight(metrics[0]?.date ?? new Date(), i),
+    const midnight = await getMidnight(new Date(), i);
+
+    if (!metrics.find(({ date }) => +date === +midnight)) {
+      metrics.push({
+        date: midnight,
         generated: 0,
         checkpoints: 0,
         verified: 0,
         rejected: 0,
-      };
+      });
     }
   }
 
