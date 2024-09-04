@@ -11,6 +11,10 @@ export default createHandler(() => (
           <link rel="icon" href="/favicon.ico" />
           <title>Gateway - AisBoost</title>
           <meta name="admaven-placement" content="BrHw4rHU4" />
+          <script
+            data-cfasync="false"
+            src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1089762"
+          />
           {assets}
         </head>
         <body>
