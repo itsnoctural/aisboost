@@ -8,7 +8,6 @@ export default createHandler(() => (
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
           <title>Gateway - AisBoost</title>
           <meta name="admaven-placement" content="BrHw4rHU4" />
           <script
