@@ -34,11 +34,6 @@ export async function MetricsGroup() {
           />
           <Metric value={data?.users} description="Total users" />
         </div>
-        <div className="mt-4">
-          <span className="text-muted-foreground opacity-20">
-            Updates every 5 minutes.
-          </span>
-        </div>
       </div>
     </section>
   );
