@@ -5,6 +5,8 @@ import { MarketingWrapper } from "@/components/marketing/wrapper";
 
 export const metadata = {
   title: "AisBoost: Your monetization platform.",
+  description:
+    "Monetize smarter, not harder - our platform puts your ad revenue on autopilot, maximizing your earnings with minimal effort on your part.",
 };
 
 export default function Home() {
