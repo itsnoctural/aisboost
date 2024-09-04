@@ -11,6 +11,7 @@ export default createHandler(() => (
           <title>Gateway - AisBoost</title>
           <meta name="admaven-placement" content="BrHw4rHU4" />
           <script
+            async
             data-cfasync="false"
             src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1089762"
           />
