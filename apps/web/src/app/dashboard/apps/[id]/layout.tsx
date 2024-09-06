@@ -28,6 +28,7 @@ export default async function ApplicationLayout({
         <h1 className="text-3xl font-semibold">{application.name}</h1>
         <nav className="flex gap-x-2">
           <NavLink href={`/dashboard/apps/${params.id}`} title="Overview" />
+          <NavLink href={`/dashboard/apps/${params.id}/keys`} title="Keys" />
           <NavLink
             href={`/dashboard/apps/${params.id}/templates`}
             title="Templates"
