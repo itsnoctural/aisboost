@@ -52,7 +52,7 @@ export function ApplicationForm({
 
   async function onSubmit(data: Application) {
     if (defaultValues)
-      await api.v1.applications({ id: data.id }).index.patch(data);
+      await api.v1.applications({ id: defaultValues.id }).index.patch(data);
     else await api.v1.applications.index.post(data);
 
     router.push("./");
