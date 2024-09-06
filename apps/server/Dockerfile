@@ -4,7 +4,7 @@ WORKDIR /app
 COPY --from=node:lts-slim /usr/local/bin/node /usr/local/bin/node
 
 COPY . .
-RUN rm -rf /app/apps/web /app/packages/api
+RUN rm -rf /app/apps/web /app/apps/gateway /app/packages/api
 
 RUN bun install
 RUN bun run build
