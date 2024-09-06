@@ -49,7 +49,7 @@ export function TemplateForm({
   async function onSubmit(data: Template) {
     if (defaultValues)
       await api.v1
-        .templates({ application })({ id: data.id })
+        .templates({ application })({ id: defaultValues.id })
         .index.patch({
           ...data,
           type: data.type as "linkvertise" | "workink" | "lootlabs", // workaround. field "type" in prisma equals string, meanwhile server accepts literals
@@ -60,7 +60,7 @@ export function TemplateForm({
         type: data.type as "linkvertise" | "workink" | "lootlabs", // workaround. field "type" in prisma equals string, meanwhile server accepts literals
       });
 
-    router.push("./");
+    router.push("../");
     router.refresh();
   }
 
