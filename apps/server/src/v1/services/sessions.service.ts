@@ -27,7 +27,18 @@ export async function getSession(
 ) {
   const session = await findSession(applicationId, hwid);
   if (!session) throw error(404);
-  if (session.key) return { key: session.key };
+  if (session.key) {
+    if (+session.key.expiresAt <= +new Date()) {
+      await prisma.session.delete({
+        where: {
+          id: session.id,
+        },
+      });
+      throw error(404);
+    }
+
+    return { key: session.key };
+  }
 
   if (templateId) {
     const template = await TemplatesService.getById(templateId);
