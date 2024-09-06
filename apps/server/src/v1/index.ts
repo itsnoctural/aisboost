@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import { ApplicationsController } from "./controllers/applications.controller";
 import { AuthController } from "./controllers/auth.controller";
 import { AuthenticatorsController } from "./controllers/authenticators.controller";
+import { KeysController } from "./controllers/keys.controller";
 import { MetricsController } from "./controllers/metrics.controller";
 import { PublicController } from "./controllers/public.controller";
 import { SessionsController } from "./controllers/sessions.controller";
@@ -16,4 +17,5 @@ export const api = new Elysia({ prefix: "/v1" })
   .use(SessionsController)
   .use(AuthenticatorsController)
   .use(MetricsController)
-  .use(PublicController);
+  .use(PublicController)
+  .use(KeysController);
