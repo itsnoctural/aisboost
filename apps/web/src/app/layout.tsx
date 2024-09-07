@@ -1,6 +1,7 @@
 import { Background } from "@/components/background";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
+import Script from "next/script";
 import "./globals.css";
 
 export default function RootLayout({
@@ -14,6 +15,11 @@ export default function RootLayout({
         <ThemeProvider attribute="class">
           <Background />
           {children}
+          <Script
+            defer
+            data-domain="aisboost.com"
+            src="https://plaus.aisboost.com/js/script.js"
+          />
         </ThemeProvider>
       </body>
     </html>
