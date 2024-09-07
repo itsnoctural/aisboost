@@ -7,7 +7,7 @@ export const TemplateModel = new Elysia().model({
       t.Literal("lootlabs"),
       t.Literal("workink"),
     ]),
-    apiKey: t.String(),
-    apiUrl: t.String(),
+    apiKey: t.String({ maxLength: 128 }),
+    apiUrl: t.String({ maxLength: 64 }),
   }),
 });

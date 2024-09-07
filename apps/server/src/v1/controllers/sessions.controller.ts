@@ -6,7 +6,7 @@ export const SessionsController = new Elysia({ prefix: "/sessions" }).guard(
     params: t.Object({ application: t.Numeric() }),
     query: t.Object({
       template: t.Optional(t.Numeric()),
-      hwid: t.String(),
+      hwid: t.String({ maxLength: 96 }),
       tk: t.Optional(t.String()),
     }),
   },
