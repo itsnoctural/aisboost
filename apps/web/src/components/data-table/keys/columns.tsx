@@ -1,10 +1,12 @@
 "use client";
 import type { ColumnDef } from "@tanstack/react-table";
+import { DataTableRowActions } from "./data-table-row-actions";
 
 export type Key = {
   id: string;
   expiresAt: Date;
   hwid: string;
+  applicationId: number;
 };
 
 export const columns: ColumnDef<Key>[] = [
@@ -29,5 +31,15 @@ export const columns: ColumnDef<Key>[] = [
   {
     accessorKey: "hwid",
     header: "HWID",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      return (
+        <div className="text-right">
+          <DataTableRowActions row={row} />
+        </div>
+      );
+    },
   },
 ];
