@@ -6,7 +6,7 @@ import * as ApplicationsService from "./applications.service";
 const select = {
   id: true,
   expiresAt: true,
-  session: { select: { hwid: true } },
+  session: { select: { hwid: true, applicationId: true } },
 };
 
 export async function getAll(applicationId: number, userId: number) {
@@ -21,6 +21,7 @@ export async function getAll(applicationId: number, userId: number) {
     id: key.id,
     expiresAt: key.expiresAt,
     hwid: key.session.hwid,
+    applicationId: key.session.applicationId,
   }));
 }
 
