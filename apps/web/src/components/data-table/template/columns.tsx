@@ -20,7 +20,10 @@ export const columns: ColumnDef<Template>[] = [
     cell: ({ row }) => {
       return (
         <span>
-          {new Date(row.original.createdAt).toLocaleDateString("en-US")}
+          {new Intl.DateTimeFormat("en-US", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }).format(new Date(row.original.createdAt))}
         </span>
       );
     },

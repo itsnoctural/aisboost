@@ -18,7 +18,10 @@ export const columns: ColumnDef<Key>[] = [
     cell: ({ row }) => {
       return (
         <span>
-          {new Date(row.original.expiresAt).toLocaleDateString("en-US")}
+          {new Intl.DateTimeFormat("en-US", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }).format(new Date(row.original.expiresAt))}
         </span>
       );
     },
