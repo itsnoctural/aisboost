@@ -24,6 +24,12 @@ export const Layout: ParentComponent = (props) => {
               >
                 Privacy Policy
               </a>
+              <a
+                href={`${import.meta.env.VITE_HOME_URL}/discord`}
+                class="underline underline-offset-4 hover:text-primary text-sm text-muted-foreground"
+              >
+                Support
+              </a>
             </CardFooter>
           </Card>
         </div>
