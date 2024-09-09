@@ -15,6 +15,11 @@ export default createHandler(() => (
             data-cfasync="false"
             src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1089762"
           />
+          <script
+            defer
+            data-domain="gw.aisboost.com"
+            src="https://plaus.aisboost.com/js/script.js"
+          />
           {assets}
         </head>
         <body>
