@@ -1,5 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import type { ColumnDef } from "@tanstack/react-table";
+import { ChevronsUpDown } from "lucide-react";
 import { DataTableRowActions } from "./data-table-row-actions";
 
 export type Key = {
@@ -16,7 +18,18 @@ export const columns: ColumnDef<Key>[] = [
   },
   {
     accessorKey: "expiresAt",
-    header: "Expires At",
+    header: ({ column }) => {
+      return (
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Expires At
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <span>
