@@ -106,3 +106,25 @@ export async function processSession(
     select,
   });
 }
+
+export async function deleteByKey(
+  applicationId: number,
+  userId: number,
+  id: string,
+) {
+  const session = await prisma.session.findFirst({
+    where: {
+      applicationId,
+      application: { userId },
+      key: { id },
+    },
+  });
+
+  if (!session) throw error(404);
+
+  return await prisma.session.delete({
+    where: {
+      id: session.id,
+    },
+  });
+}

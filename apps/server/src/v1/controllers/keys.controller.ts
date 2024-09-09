@@ -1,6 +1,7 @@
 import Elysia, { t } from "elysia";
 import { auth } from "../plugins/auth";
 import * as KeysService from "../services/keys.service";
+import * as SessionsService from "../services/sessions.service";
 
 export const KeysController = new Elysia({ prefix: "/keys" })
   .use(auth)
@@ -29,7 +30,7 @@ export const KeysController = new Elysia({ prefix: "/keys" })
         .delete(
           "/:id",
           ({ params, user }) =>
-            KeysService.deleteById(params.application, user.id, params.id),
+            SessionsService.deleteByKey(params.application, user.id, params.id),
           { params: t.Object({ application: t.Numeric(), id: t.String() }) },
         ),
     ),

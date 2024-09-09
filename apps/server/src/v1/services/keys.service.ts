@@ -1,5 +1,4 @@
 import { prisma } from "@aisboost/db";
-import { error } from "elysia";
 import { nanoid } from "../lib/nanoid";
 import * as ApplicationsService from "./applications.service";
 
@@ -48,21 +47,4 @@ export async function create(
       },
     },
   });
-}
-
-export async function deleteById(
-  applicationId: number,
-  userId: number,
-  id: string,
-) {
-  try {
-    return await prisma.key.delete({
-      where: {
-        id,
-        session: { applicationId, application: { userId } },
-      },
-    });
-  } catch {
-    return error(404);
-  }
 }
