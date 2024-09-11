@@ -8,7 +8,9 @@ import {
   useSearchParams,
 } from "@solidjs/router";
 import { For, Match, Show, Switch } from "solid-js";
+import { getHeaders } from "vinxi/http";
 import { Completed } from "~/components/completed";
+import { InvalidReferrer } from "~/components/invalid-referrer";
 import { NoHwid } from "~/components/no-hwid";
 import { NotFound } from "~/components/not-found";
 import { Button } from "~/components/ui/button";
@@ -66,13 +68,24 @@ const continueAction = action(
   },
 );
 
+const isOrganic = async (tk?: string) => {
+  "use server";
+  if (!tk) return true;
+
+  const refferer = getHeaders().referer;
+  return refferer?.match(/linkvertise\.com|loot|work\.ink/);
+};
+
 export default function Gateway() {
   const params = useParams();
   const [searchParams] = useSearchParams();
 
+  const organic = createAsync(() => isOrganic(searchParams.tk));
   const application = createAsync(() => getApplication(params.id));
   const session = createAsync(async () => {
-    await processSession(params.id, searchParams.hwid, searchParams.tk);
+    if (organic())
+      await processSession(params.id, searchParams.hwid, searchParams.tk);
+
     return getSession(params.id, searchParams.hwid);
   });
 
@@ -89,16 +102,18 @@ export default function Gateway() {
             {(application) => (
               <>
                 <CardHeader>
-                  <CardTitle>{application().name}</CardTitle>
-                  <CardSubtitle>
-                    Checkpoint {session()?.checkpoint || 1} of{" "}
-                    {application().checkpoints}
-                  </CardSubtitle>
-                  <CardDescription>
-                    Choose preferred method, you may see pop-ups/ads and they
-                    can be a bit annoying, but they directly support the
-                    creators.
-                  </CardDescription>
+                  <Show when={organic()} fallback={<InvalidReferrer />}>
+                    <CardTitle>{application().name}</CardTitle>
+                    <CardSubtitle>
+                      Checkpoint {session()?.checkpoint || 1} of{" "}
+                      {application().checkpoints}
+                    </CardSubtitle>
+                    <CardDescription>
+                      Choose preferred method, you may see pop-ups/ads and they
+                      can be a bit annoying, but they directly support the
+                      creators.
+                    </CardDescription>
+                  </Show>
                 </CardHeader>
                 <CardContent class="flex">
                   <div class="flex flex-col px-6 w-full gap-y-2">
