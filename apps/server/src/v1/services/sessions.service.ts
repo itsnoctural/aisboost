@@ -66,7 +66,7 @@ export async function processSession(
   hwid: string,
   tk?: string,
 ) {
-  await ApplicationsService.getById(applicationId);
+  const application = await ApplicationsService.getById(applicationId);
 
   const session = await findSession(applicationId, hwid);
   if (session) {
@@ -86,13 +86,7 @@ export async function processSession(
       });
     }
 
-    const key = await AuthenticatorsService.whitelist(
-      applicationId,
-      session.id,
-      session.application.keyPrefix,
-      session.application.keyLength,
-      session.application.duration,
-    );
+    const key = await AuthenticatorsService.whitelist(application, session.id);
 
     return { key: key.id };
   }

@@ -3,22 +3,24 @@ import { nanoid } from "../lib/nanoid";
 import * as MetricsService from "./metrics.service";
 
 export async function whitelist(
-  applicationId: number,
+  application: {
+    id: number;
+    keyPrefix: string;
+    keyLength: number;
+    duration: number;
+  },
   sessionId: string,
-  prefix: string,
-  length: number,
-  duration: number,
 ) {
-  const key = `${prefix}_${nanoid(length)}`;
+  const key = `${application.keyPrefix}_${nanoid(application.keyLength)}`;
 
-  MetricsService.updateApplicationMetrics(applicationId, "generated");
+  MetricsService.updateApplicationMetrics(application.id, "generated");
 
   return await prisma.key.create({
     data: {
       id: key,
       sessionId,
       expiresAt: new Date(
-        new Date().getTime() + duration * 3600000,
+        new Date().getTime() + application.duration * 3600000,
       ).toISOString(),
     },
   });
