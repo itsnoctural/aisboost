@@ -82,28 +82,28 @@ export function DashboardChart({ data }: Props) {
           type="bump"
           fill="url(#fillGenerated)"
           stroke="var(--color-generated)"
-          stackId="a"
+          stackId="gen"
         />
         <Area
           dataKey="checkpoints"
           type="bump"
           fill="url(#fillCheckpoints)"
           stroke="var(--color-checkpoints)"
-          stackId="a"
+          stackId="che"
         />
         <Area
           dataKey="verified"
           type="bump"
           fill="url(#fillVerified)"
           stroke="var(--color-verified)"
-          stackId="a"
+          stackId="ver"
         />
         <Area
           dataKey="rejected"
           type="bump"
           fill="url(#fillRejected)"
           stroke="var(--color-rejected)"
-          stackId="a"
+          stackId="rej"
         />
         <ChartLegend content={<ChartLegendContent />} />
       </AreaChart>
