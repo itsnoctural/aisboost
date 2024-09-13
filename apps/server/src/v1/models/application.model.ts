@@ -7,5 +7,9 @@ export const ApplicationModel = new Elysia().model({
     checkpoints: t.Number({ minimum: 1, maximum: 5 }),
     keyPrefix: t.String({ minLength: 1, maxLength: 5 }),
     keyLength: t.Number({ minimum: 6, maximum: 24 }),
+    webhook: t.Optional(
+      t.RegExp(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/),
+    ),
+    webhookContent: t.Optional(t.String({ maxLength: 256 })),
   }),
 });

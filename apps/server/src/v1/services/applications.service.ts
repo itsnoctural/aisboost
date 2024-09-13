@@ -18,6 +18,8 @@ const select = {
   checkpoints: true,
   keyPrefix: true,
   keyLength: true,
+  webhook: true,
+  webhookContent: true,
 };
 
 export async function findAll(userId: number) {

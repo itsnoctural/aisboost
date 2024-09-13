@@ -45,8 +45,10 @@ model Application {
   duration    Int @db.SmallInt
   checkpoints Int @db.SmallInt
 
-  keyPrefix String @map("key_prefix")
-  keyLength Int    @map("key_length")
+  keyPrefix      String  @map("key_prefix")
+  keyLength      Int     @map("key_length")
+  webhook        String?
+  webhookContent String? @map("webhook_content")
 
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")

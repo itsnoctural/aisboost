@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 type Application = {
   id: number;
@@ -24,6 +25,8 @@ type Application = {
   checkpoints: number;
   keyPrefix: string;
   keyLength: number;
+  webhook?: string;
+  webhookContent?: string;
 };
 
 const applicationSchema = z.object({
@@ -32,6 +35,10 @@ const applicationSchema = z.object({
   checkpoints: z.coerce.number().min(1).max(5),
   keyPrefix: z.string().min(1).max(5),
   keyLength: z.coerce.number().min(6).max(24),
+  webhook: z.optional(
+    z.string().regex(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/),
+  ),
+  webhookContent: z.optional(z.string().max(256)),
 });
 
 export function ApplicationForm({
@@ -45,6 +52,8 @@ export function ApplicationForm({
       checkpoints: defaultValues?.checkpoints ?? 1,
       keyPrefix: defaultValues?.keyPrefix ?? "KEY",
       keyLength: defaultValues?.keyLength ?? 12,
+      webhook: defaultValues?.webhook ?? "",
+      webhookContent: defaultValues?.webhookContent ?? "",
     },
   });
 
@@ -149,6 +158,44 @@ export function ApplicationForm({
                 </FormItem>
               )}
             />
+            {defaultValues && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="webhook"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Webhook URL</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="discord.com/api/webhooks/..."
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="webhookContent"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Webhook Content</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder={
+                            "{key} just was generated for {hwid}.\nExpire: <t:{expire}:R>"
+                          }
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
             <Button type="submit">Sumbit</Button>
           </div>
         </form>

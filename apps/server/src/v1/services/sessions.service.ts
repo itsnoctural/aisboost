@@ -73,7 +73,7 @@ export async function processSession(
     if (session.key) return { key: session.key.id };
     if (session.tk !== tk) throw error(400);
 
-    await MetricsService.updateApplicationMetrics(
+    MetricsService.updateApplicationMetrics(
       session.applicationId,
       "checkpoints",
     );
@@ -86,7 +86,12 @@ export async function processSession(
       });
     }
 
-    const key = await AuthenticatorsService.whitelist(application, session.id);
+    const key = await AuthenticatorsService.whitelist(
+      application,
+      session.id,
+      { url: application.webhook, content: application.webhookContent },
+      hwid,
+    );
 
     return { key: key.id };
   }

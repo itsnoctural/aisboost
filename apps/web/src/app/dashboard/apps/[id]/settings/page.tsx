@@ -11,7 +11,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <ApplicationForm defaultValues={application} />
+      <ApplicationForm
+        defaultValues={{
+          ...application,
+          webhook: application?.webhook ?? "",
+          webhookContent: application?.webhookContent ?? "",
+        }}
+      />
     </>
   );
 }
