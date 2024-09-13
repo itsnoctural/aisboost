@@ -33,7 +33,7 @@ export async function redeem(applicationId: number, hwid: string, id: string) {
     },
   });
 
-  await MetricsService.updateApplicationMetrics(
+  MetricsService.updateApplicationMetrics(
     applicationId,
     key ? "verified" : "rejected",
   );
