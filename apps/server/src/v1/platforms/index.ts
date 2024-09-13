@@ -1,5 +1,6 @@
 import { linkvertise } from "./linkvertise";
 import { lootlabs } from "./lootlabs";
+import { shrtfly } from "./shrtfly";
 import { workink } from "./workink";
 
 export const platforms: {
@@ -12,4 +13,5 @@ export const platforms: {
   linkvertise,
   lootlabs,
   workink,
+  shrtfly,
 };

@@ -31,6 +31,9 @@ const templateSchema = z.object({
   apiUrl: z.string(),
 });
 
+// workaround. field "type" in prisma equals string, meanwhile server accepts literals
+type TemplateType = "linkvertise" | "workink" | "lootlabs" | "shrtfly";
+
 export function TemplateForm({
   application,
   defaultValues,
@@ -52,12 +55,12 @@ export function TemplateForm({
         .templates({ application })({ id: defaultValues.id })
         .index.patch({
           ...data,
-          type: data.type as "linkvertise" | "workink" | "lootlabs", // workaround. field "type" in prisma equals string, meanwhile server accepts literals
+          type: data.type as TemplateType,
         });
     else
       await api.v1.templates({ application }).index.post({
         ...data,
-        type: data.type as "linkvertise" | "workink" | "lootlabs", // workaround. field "type" in prisma equals string, meanwhile server accepts literals
+        type: data.type as TemplateType,
       });
 
     router.push("../");
@@ -86,6 +89,7 @@ export function TemplateForm({
                         <SelectItem value="linkvertise">Linkvertise</SelectItem>
                         <SelectItem value="workink">Work Ink</SelectItem>
                         <SelectItem value="lootlabs">LootLabs</SelectItem>
+                        <SelectItem value="shrtfly">ShrtFly</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
