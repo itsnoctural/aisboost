@@ -77,6 +77,56 @@ export function DashboardChart({ data }: Props) {
             />
           }
         />
+        <defs>
+          <linearGradient id="fillGenerated" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-generated)"
+              stopOpacity={0.6}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-generated)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+          <linearGradient id="fillCheckpoints" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-checkpoints)"
+              stopOpacity={0.6}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-checkpoints)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+          <linearGradient id="fillVerified" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-verified)"
+              stopOpacity={0.6}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-verified)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+          <linearGradient id="fillRejected" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-rejected)"
+              stopOpacity={0.6}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-rejected)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+        </defs>
         <Area
           dataKey="generated"
           type="bump"
