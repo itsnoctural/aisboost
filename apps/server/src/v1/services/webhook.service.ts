@@ -11,6 +11,18 @@ export async function send(
       Math.round(data.expiresAt.getTime() / 1000).toString(),
     );
 
+  const thumbnail: { url?: string } = {};
+
+  if (Number.parseInt(data.hwid)) {
+    const user = await fetch(
+      `https://www.roblox.com/avatar-thumbnails?params=[{userId:${data.hwid}}]`,
+    ).then((response) => response.json());
+
+    if (user[0]?.thumbnailUrl) {
+      thumbnail.url = user[0].thumbnailUrl;
+    }
+  }
+
   return await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -18,6 +30,7 @@ export async function send(
       embeds: [
         {
           description: formatted,
+          thumbnail,
           footer: {
             text: "aisboost.com",
           },
