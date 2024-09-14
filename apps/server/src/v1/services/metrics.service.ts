@@ -10,16 +10,16 @@ async function getMidnight(startDate: Date, days: number) {
 }
 
 export async function getGeneralMetrics() {
-  const { _sum } = await prisma.session.aggregate({
+  const { _sum } = await prisma.metrics.aggregate({
     _sum: {
-      checkpoint: true,
+      checkpoints: true,
     },
   });
   const applications = await prisma.application.count();
   const users = await prisma.user.count();
 
   return {
-    checkpoints: _sum.checkpoint || 0,
+    checkpoints: _sum.checkpoints || 0,
     applications,
     users,
   };
