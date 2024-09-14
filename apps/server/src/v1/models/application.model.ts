@@ -8,8 +8,13 @@ export const ApplicationModel = new Elysia().model({
     keyPrefix: t.String({ minLength: 1, maxLength: 5 }),
     keyLength: t.Number({ minimum: 6, maximum: 24 }),
     webhook: t.Optional(
-      t.RegExp(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/),
+      t.Union([
+        t.RegExp(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/),
+        t.Null(),
+      ]),
     ),
-    webhookContent: t.Optional(t.String({ maxLength: 256 })),
+    webhookContent: t.Optional(
+      t.Union([t.String({ maxLength: 256 }), t.Null()]),
+    ),
   }),
 });

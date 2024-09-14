@@ -35,9 +35,12 @@ const applicationSchema = z.object({
   checkpoints: z.coerce.number().min(1).max(5),
   keyPrefix: z.string().min(1).max(5),
   keyLength: z.coerce.number().min(6).max(24),
-  webhook: z.optional(
-    z.string().regex(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/),
-  ),
+  webhook: z
+    .string()
+    .regex(/^https:\/\/discord\.com\/api\/webhooks\/\d+\/[\w-]+$/)
+    .optional()
+    .or(z.literal("")),
+
   webhookContent: z.optional(z.string().max(256)),
 });
 
@@ -61,7 +64,11 @@ export function ApplicationForm({
 
   async function onSubmit(data: Application) {
     if (defaultValues)
-      await api.v1.applications({ id: defaultValues.id }).index.patch(data);
+      await api.v1.applications({ id: defaultValues.id }).index.patch({
+        ...data,
+        webhook: data.webhook === "" ? null : data.webhook,
+        webhookContent: data.webhookContent === "" ? null : data.webhookContent,
+      });
     else await api.v1.applications.index.post(data);
 
     router.push("./");
