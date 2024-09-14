@@ -14,7 +14,7 @@ export const ApplicationModel = new Elysia().model({
       ]),
     ),
     webhookContent: t.Optional(
-      t.Union([t.String({ maxLength: 256 }), t.Null()]),
+      t.Union([t.String({ maxLength: 1024 }), t.Null()]),
     ),
   }),
 });

@@ -41,7 +41,7 @@ const applicationSchema = z.object({
     .optional()
     .or(z.literal("")),
 
-  webhookContent: z.optional(z.string().max(256)),
+  webhookContent: z.optional(z.string().max(1024)),
 });
 
 export function ApplicationForm({
