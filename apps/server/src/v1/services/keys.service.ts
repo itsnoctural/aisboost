@@ -12,7 +12,7 @@ export async function getAll(applicationId: number, userId: number) {
   await ApplicationsService.getById(applicationId, userId);
 
   const keys = await prisma.key.findMany({
-    where: { session: { applicationId } },
+    where: { session: { applicationId }, expiresAt: { gte: new Date() } },
     select,
   });
 
