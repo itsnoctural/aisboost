@@ -63,13 +63,15 @@ export function ApplicationForm({
   const router = useRouter();
 
   async function onSubmit(data: Application) {
+    const body = {
+      ...data,
+      webhook: data.webhook === "" ? null : data.webhook,
+      webhookContent: data.webhookContent === "" ? null : data.webhookContent,
+    };
+
     if (defaultValues)
-      await api.v1.applications({ id: defaultValues.id }).index.patch({
-        ...data,
-        webhook: data.webhook === "" ? null : data.webhook,
-        webhookContent: data.webhookContent === "" ? null : data.webhookContent,
-      });
-    else await api.v1.applications.index.post(data);
+      await api.v1.applications({ id: defaultValues.id }).index.patch(body);
+    else await api.v1.applications.index.post(body);
 
     router.push("./");
     router.refresh();
