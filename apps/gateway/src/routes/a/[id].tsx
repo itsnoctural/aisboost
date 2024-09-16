@@ -8,7 +8,6 @@ import {
   useSearchParams,
 } from "@solidjs/router";
 import { For, Match, Show, Switch } from "solid-js";
-import { getHeaders } from "vinxi/http";
 import { Completed } from "~/components/completed";
 import { InvalidReferrer } from "~/components/invalid-referrer";
 import { NoHwid } from "~/components/no-hwid";
@@ -70,10 +69,11 @@ const continueAction = action(
 
 const isOrganic = async (tk?: string) => {
   "use server";
-  if (!tk) return true;
+  return true;
+  // if (!tk) return true;
 
-  const refferer = getHeaders().referer;
-  return refferer?.match(/linkvertise\.com|loot|work\.ink|techmize/);
+  // const refferer = getHeaders().referer;
+  // return refferer?.match(/linkvertise\.com|loot|work\.ink|techmize/);
 };
 
 export default function Gateway() {
