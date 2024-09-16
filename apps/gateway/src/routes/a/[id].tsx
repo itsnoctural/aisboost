@@ -73,7 +73,7 @@ const isOrganic = async (tk?: string) => {
   if (!tk) return true;
 
   const refferer = getHeaders().referer;
-  return refferer?.match(/linkvertise\.com|loot|work\.ink/);
+  return refferer?.match(/linkvertise\.com|loot|work\.ink|stfly/);
 };
 
 export default function Gateway() {
