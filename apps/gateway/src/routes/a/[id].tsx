@@ -8,6 +8,7 @@ import {
   useSearchParams,
 } from "@solidjs/router";
 import { For, Match, Show, Switch } from "solid-js";
+import { getHeaders } from "vinxi/http";
 import { Completed } from "~/components/completed";
 import { InvalidReferrer } from "~/components/invalid-referrer";
 import { NoHwid } from "~/components/no-hwid";
@@ -67,20 +68,21 @@ const continueAction = action(
   },
 );
 
-const isOrganic = async (tk?: string) => {
+const isOrganic = async (tk?: string, template?: string) => {
   "use server";
-  return true;
-  // if (!tk) return true;
+  if (!tk || template) return true;
 
-  // const refferer = getHeaders().referer;
-  // return refferer?.match(/linkvertise\.com|loot|work\.ink|techmize/);
+  const referer = getHeaders().referer;
+  return referer?.match(/linkvertise\.com|loot|work\.ink/);
 };
 
 export default function Gateway() {
   const params = useParams();
   const [searchParams] = useSearchParams();
 
-  const organic = createAsync(() => isOrganic(searchParams.tk));
+  const organic = createAsync(() =>
+    isOrganic(searchParams.tk, searchParams.template),
+  );
   const application = createAsync(() => getApplication(params.id));
   const session = createAsync(async () => {
     if (organic())
