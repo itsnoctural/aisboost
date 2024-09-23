@@ -49,7 +49,7 @@ export async function getSession(
     return {
       checkpoint: session.checkpoint,
       next: await platform(
-        `${Bun.env.GATEWAY_URL}/a/${applicationId}?hwid=${hwid}&tk=${session.tk}`,
+        `${Bun.env.GATEWAY_URL}/a/${applicationId}?hwid=${hwid}&tk=${session.tk}${template.type === "shrtfly" ? `&template=${template.id}` : ""}`,
         template.apiKey,
         template.apiUrl,
       ),
