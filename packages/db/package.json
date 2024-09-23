@@ -6,7 +6,7 @@
     "db:generate": "prisma generate"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.9.4",
+    "@neondatabase/serverless": "^0.9.5",
     "@prisma/adapter-neon": "^5.19.1",
     "@prisma/client": "^5.19.1"
   },
