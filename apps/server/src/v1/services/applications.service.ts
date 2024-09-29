@@ -18,8 +18,6 @@ const select = {
   checkpoints: true,
   keyPrefix: true,
   keyLength: true,
-  webhook: true,
-  webhookContent: true,
 };
 
 export async function findAll(userId: number) {
@@ -44,7 +42,11 @@ export async function findByIdWithTemplates(id: number) {
 export async function getById(id: number, userId?: number) {
   const app = await prisma.application.findUnique({
     where: { id, userId },
-    select,
+    select: {
+      ...select,
+      webhook: true,
+      webhookContent: true,
+    },
   });
 
   if (!app) throw error(404);
