@@ -7,6 +7,7 @@ import {
   useParams,
   useSearchParams,
 } from "@solidjs/router";
+import { BsYoutube } from "solid-icons/bs";
 import { For, Match, Show, Switch } from "solid-js";
 import { getHeaders } from "vinxi/http";
 import { Completed } from "~/components/completed";
@@ -133,6 +134,14 @@ export default function Gateway() {
                         </Button>
                       )}
                     </For>
+                    <Button
+                      class="bg-red-600 hover:bg-red-500 text-white gap-x-1"
+                      as="a"
+                      href="https://youtu.be/E9G9YXVN6K0"
+                    >
+                      <BsYoutube />
+                      How to complete checkpoints
+                    </Button>
                   </div>
                 </CardContent>
               </>
