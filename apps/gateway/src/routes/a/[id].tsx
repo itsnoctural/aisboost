@@ -121,24 +121,16 @@ export default function Gateway() {
                   <div class="flex flex-col px-6 w-full gap-y-2">
                     <For each={application().templates}>
                       {(item) => (
-                        <Show
-                          when={
-                            searchParams.tpl
-                              ? Number(searchParams.tpl) === item.id
-                              : true
+                        <Button
+                          class={"w-full"}
+                          variant={"outline"}
+                          type="sumbit"
+                          onClick={() =>
+                            buttonAction(application().id, hwid(), item.id)
                           }
                         >
-                          <Button
-                            class={"w-full"}
-                            variant={"outline"}
-                            type="sumbit"
-                            onClick={() =>
-                              buttonAction(application().id, hwid(), item.id)
-                            }
-                          >
-                            <img src={`/${item.type}.webp`} alt={item.type} />
-                          </Button>
-                        </Show>
+                          <img src={`/${item.type}.webp`} alt={item.type} />
+                        </Button>
                       )}
                     </For>
                   </div>
