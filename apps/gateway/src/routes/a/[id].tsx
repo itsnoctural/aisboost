@@ -73,8 +73,11 @@ const isOrganic = async (tk?: string, template?: string) => {
   "use server";
   if (!tk || template) return true;
 
-  const referer = getHeaders().referer;
-  return referer?.match(/linkvertise\.com|loot|work\.ink/);
+  const headers = getHeaders();
+  return (
+    headers.referer?.match(/linkvertise\.com|loot|work\.ink/) &&
+    !headers["CloudFront-Viewer-ASN"]?.match("AS16509 AMAZON-02")
+  );
 };
 
 export default function Gateway() {
