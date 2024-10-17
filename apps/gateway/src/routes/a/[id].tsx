@@ -53,7 +53,10 @@ const processSession = async (
   tk?: string,
 ) => {
   "use server";
-  if (!hwid) return null;
+
+  const headers = getHeaders();
+  if (!hwid || headers["CloudFront-Viewer-ASN"]?.match("AS16509 AMAZON-02"))
+    return null;
 
   await api.v1
     .sessions({ application: applicationId })
@@ -73,11 +76,8 @@ const isOrganic = async (tk?: string, template?: string) => {
   "use server";
   if (!tk || template) return true;
 
-  const headers = getHeaders();
-  return (
-    headers.referer?.match(/linkvertise\.com|loot|work\.ink/) &&
-    !headers["CloudFront-Viewer-ASN"]?.match("AS16509 AMAZON-02")
-  );
+  const referer = getHeaders().referer;
+  return referer?.match(/linkvertise\.com|loot|work\.ink/);
 };
 
 export default function Gateway() {
