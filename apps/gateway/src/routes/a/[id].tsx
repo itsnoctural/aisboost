@@ -55,8 +55,7 @@ const processSession = async (
   "use server";
 
   const headers = getHeaders();
-  if (!hwid || headers["CloudFront-Viewer-ASN"]?.match("AS16509 AMAZON-02"))
-    return null;
+  if (!hwid || headers["CloudFront-Viewer-ASN"]?.match("AMAZON")) return null;
 
   await api.v1
     .sessions({ application: applicationId })
