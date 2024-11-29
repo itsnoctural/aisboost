@@ -10,9 +10,7 @@ export const AuthController = new Elysia({ prefix: "/auth" })
     app
       .get("/github", async ({ cookie, redirect }) => {
         const state = generateState();
-        const url = await github.createAuthorizationURL(state, {
-          scopes: ["user:email"],
-        });
+        const url = await github.createAuthorizationURL(state, ["user:email"]);
 
         cookie.github_state.set({
           value: state,
@@ -29,9 +27,9 @@ export const AuthController = new Elysia({ prefix: "/auth" })
         const state = generateState();
         const codeVerifier = generateCodeVerifier();
 
-        const url = await google.createAuthorizationURL(state, codeVerifier, {
-          scopes: ["email"],
-        });
+        const url = await google.createAuthorizationURL(state, codeVerifier, [
+          "email",
+        ]);
 
         cookie.google_state.set({
           value: state,
@@ -77,7 +75,7 @@ export const AuthController = new Elysia({ prefix: "/auth" })
           const { accessToken } = await github.validateAuthorizationCode(
             query.code,
           );
-          const { id, email } = await AuthService.getUserGithub(accessToken);
+          const { id, email } = await AuthService.getUserGithub(accessToken());
 
           const user = await UsersService.findOrCreate(
             `${id}`,
@@ -107,7 +105,7 @@ export const AuthController = new Elysia({ prefix: "/auth" })
             cookie.code_verifier.value,
           );
 
-          const { sub, email } = await AuthService.getUserGoogle(accessToken);
+          const { sub, email } = await AuthService.getUserGoogle(accessToken());
 
           const user = await UsersService.findOrCreate(
             `${sub}`,
