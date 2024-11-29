@@ -72,10 +72,10 @@ export const AuthController = new Elysia({ prefix: "/auth" })
           if (cookie.github_state.value !== query.state)
             throw error(400, "Incorrect state.");
 
-          const { accessToken } = await github.validateAuthorizationCode(
-            query.code,
+          const tokens = await github.validateAuthorizationCode(query.code);
+          const { id, email } = await AuthService.getUserGithub(
+            tokens.accessToken(),
           );
-          const { id, email } = await AuthService.getUserGithub(accessToken());
 
           const user = await UsersService.findOrCreate(
             `${id}`,
@@ -100,12 +100,14 @@ export const AuthController = new Elysia({ prefix: "/auth" })
           )
             throw error(400, "Incorrect state.");
 
-          const { accessToken } = await google.validateAuthorizationCode(
+          const tokens = await google.validateAuthorizationCode(
             query.code,
             cookie.code_verifier.value,
           );
 
-          const { sub, email } = await AuthService.getUserGoogle(accessToken());
+          const { sub, email } = await AuthService.getUserGoogle(
+            tokens.accessToken(),
+          );
 
           const user = await UsersService.findOrCreate(
             `${sub}`,
