@@ -7,7 +7,8 @@ import { HiXMark } from "react-icons/hi2";
 import { IoCheckmark } from "react-icons/io5";
 import { VscKey } from "react-icons/vsc";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { data: total } = await api.v1
     .metrics({ application: params.id })
     .total.get();

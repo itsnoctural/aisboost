@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api/server";
 import Link from "next/link";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { data: templates } = await api.v1
     .templates({ application: params.id })
     .index.get();

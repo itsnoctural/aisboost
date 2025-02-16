@@ -7,11 +7,11 @@ export const MetricsController = new Elysia({ prefix: "/metrics" })
   .group("/:application", (app) =>
     app
       .use(auth)
-      .guard({ params: t.Object({ application: t.Numeric() }) })
+      .guard({ params: t.Object({ application: t.Number() }) })
       .get("/", ({ params, user }) =>
-        MetricsService.getApplicationMetrics(params.application, user.id),
+        MetricsService.getApplicationMetrics(+params.application, user.id),
       )
       .get("/total", ({ params, user }) =>
-        MetricsService.getTotalMetrics(params.application, user.id),
+        MetricsService.getTotalMetrics(+params.application, user.id),
       ),
   );

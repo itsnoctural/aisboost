@@ -2,7 +2,8 @@ import { NavLink } from "@/components/dashboard/nav-link";
 import { api } from "@/lib/api/server";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { data: application } = await api.v1
     .applications({ id: params.id })
     .index.get();
@@ -12,10 +13,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function ApplicationLayout({
-  params,
-  children,
-}: { params: { id: string }; children: React.ReactNode }) {
+export default async function ApplicationLayout(props: { params: Promise<{ id: string }>; children: React.ReactNode }) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const { data: application } = await api.v1
     .applications({ id: params.id })
     .index.get();

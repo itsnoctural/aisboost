@@ -9,13 +9,13 @@
     "@aisboost/db": "workspace:*",
     "@elysiajs/cors": "^1.2.0",
     "@lucia-auth/adapter-prisma": "^4.0.1",
-    "arctic": "^2.3.0",
-    "elysia": "^1.2.10",
+    "arctic": "^3.3.0",
+    "elysia": "^1.2.12",
     "lucia": "^3.2.2",
-    "nanoid": "^5.0.9"
+    "nanoid": "^5.1.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.14",
+    "@types/bun": "^1.2.2",
     "@aisboost/tsconfig": "workspace:*"
   },
   "type": "module",
